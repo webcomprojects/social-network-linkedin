@@ -42,7 +42,7 @@
                             <label class="form-check-label" for="remember_me">{{ get_phrase('Remember me') }}</label>
                           </div>
 
-                        <input class="btn btn-primary my-3" type="submit" name="submit" id="submit" value="Log In">
+                        <input class="btn btn-primary my-3" type="submit" name="submit" id="submit" value="ورود">
 
                         
                         <div class="flex items-center justify-end mt-2">

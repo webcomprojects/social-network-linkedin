@@ -39,4 +39,10 @@ return [
         'industry_type' => env('PAYTM_INDUSTRY_TYPE'),
     ],
 
+    'ippanel' => [
+        'api_key' => env('IPPANEL_API_KEY'),
+        'originator' => env('IPPANEL_ORIGINATOR'),
+        'pattern_code' => env('IPPANEL_PATTERN_CODE'),
+    ],
+
 ];

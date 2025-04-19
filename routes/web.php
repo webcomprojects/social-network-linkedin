@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\OtpLoginController;
 use App\Http\Controllers\InstallController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\MemoriesController;
@@ -72,7 +73,7 @@ Route::get('/account-enble-req/{id}', function (Request $request, $id) {
     $data['status'] = 'pending';
     Account_active_request::create($data);
     flash()->addSuccess('Account enable request successfully');
-        return redirect()->back();
+    return redirect()->back();
 })->name('frontend.account_enble_req');
 
 
@@ -80,7 +81,7 @@ Route::get('/account-enble-req/{id}', function (Request $request, $id) {
 Route::controller(ModalController::class)->middleware('auth', 'user', 'verified', 'activity')->group(function () {
     Route::any('/load_modal_content/{view_path}', 'common_view_function')->name('load_modal_content');
 });
- 
+
 //Home controllers group routing
 Route::controller(MainController::class)->middleware('auth', 'user', 'user', 'verified', 'activity', 'prevent-back-history')->group(function () {
     Route::get('/', 'timeline')->name('timeline');
@@ -128,14 +129,14 @@ Route::controller(MainController::class)->middleware('auth', 'user', 'user', 've
     // live streaming
     Route::get('/streaming/live/{id}', 'live_streaming')->name('go.live');
 
-   
+
 
     // Theme Controller
     Route::post('/update-theme-color', 'updateThemeColor')->name('update-theme-color');
 
 
     Route::get('album/details/page_show/{id}', 'details_album')->name('album.details.page_show');
-    
+
     // Block User from frontend
     Route::get('/block_user/{id}', 'block_user')->name('block_user');
     Route::post('/block_user_post/{id}', 'block_user_post')->name('block_user_post');
@@ -153,7 +154,7 @@ Route::controller(MemoriesController::class)->middleware('auth', 'user', 'verifi
 });
 
 // Badge  Controller
-Route::controller(BadgeController::class)->middleware('auth', 'user', 'verified', 'activity','prevent-back-history')->group(function () {
+Route::controller(BadgeController::class)->middleware('auth', 'user', 'verified', 'activity', 'prevent-back-history')->group(function () {
     Route::get('/badge', 'badge')->name('badge');
     Route::get('/badge/info', 'badge_info')->name('badge.info');
     Route::post('badge/payment_configuration/{id}', 'payment_configuration')->name('badge.payment_configuration');
@@ -246,3 +247,46 @@ Route::controller(InstallController::class)->group(function () {
     Route::get('install/success', 'success')->name('success');
 });
 //Installation routes
+
+
+Route::get('order', function () {
+    $result = ZarinPal::request(
+        1000,
+        'http://127.0.0.1:8000/payment-test',
+        'Payment for Order #123',
+        'customer@example.com',
+        '09123456789',
+    );
+
+    if ($result['success']) {
+        // Store the authority for verification later
+        $authority = $result['authority'];
+
+        // Redirect the user to ZarinPal payment page
+        return redirect($result['paymentUrl']);
+    } else {
+        // Handle error
+        return 'Error: ' . $result['error']['message'];
+    }
+});
+
+Route::get('payment-test', function (Request $request) {
+    $authority = $request->input('Authority');
+    $status = $request->input('Status');
+
+    if ($status !== 'OK') {
+        return 'Payment was canceled by user.';
+    }
+
+    // Verify the payment
+    $result = ZarinPal::verify($authority, 1000);
+
+    if ($result['success']) {
+        $referenceId = $result['referenceId'];
+        return 'Payment was successful. Reference ID: ' . $referenceId;
+    } else {
+        return 'Error in payment verification: ' . $result['error']['message'];
+    }
+});
+
+Route::get('/otp/login', [OtpLoginController::class, 'showLoginForm']);

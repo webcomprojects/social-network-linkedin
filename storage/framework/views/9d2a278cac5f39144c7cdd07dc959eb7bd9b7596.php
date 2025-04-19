@@ -24,6 +24,7 @@
     <!-- Style css -->
     <link rel="stylesheet" href="<?php echo e(asset('assets/frontend/css/style.css')); ?>">
     <link rel="stylesheet" href="<?php echo e(asset('assets/frontend/css/own.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/frontend/css/custom-style.css')); ?>">
 
    
 </head>
@@ -52,9 +53,9 @@
 
                 <div class="col-auto col-lg-6 ms-auto">
                     <div class="login-btns ms-5">
-                        <a href="<?php echo e(route('login')); ?>" class="btn <?php if(Route::currentRouteName() == 'login'): ?> active <?php endif; ?>"><?php echo e(__('Login')); ?></a>
+                        <a href="<?php echo e(route('login')); ?>" class="btn <?php if(Route::currentRouteName() == 'login'): ?> active <?php endif; ?>"><?php echo e(__('ورود')); ?></a>
                         <?php if(get_settings('public_signup') == 1): ?>
-                            <a href="<?php echo e(route('register')); ?>" class="btn <?php if(Route::currentRouteName() == 'register'): ?> active <?php endif; ?>"><?php echo e(__('Sign up')); ?></a>
+                            <a href="<?php echo e(route('register')); ?>" class="btn <?php if(Route::currentRouteName() == 'register'): ?> active <?php endif; ?>"><?php echo e(__('ثبت نام')); ?></a>
                         <?php endif; ?>
                     </div>
                 </div>

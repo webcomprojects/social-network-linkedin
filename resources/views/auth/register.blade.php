@@ -42,7 +42,7 @@
                                 <input type="checkbox" class="form-check-input" name="check1" id="exampleCheck1">
                                 <label class="form-check-label" for="exampleCheck1">{{get_phrase('I accept the')}} <a href="{{ route('term.view') }}">{{get_phrase('Terms and Conditions')}}</a></label>
                               </div>
-                            <input class="btn btn-primary my-3 disabled" type="submit" name="submit" id="submit" value="Sign Up">
+                            <input class="btn btn-primary my-3 disabled" type="submit" name="submit" id="submit" value="ثبت نام">
 
                         </form>
 

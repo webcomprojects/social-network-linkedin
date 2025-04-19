@@ -199,7 +199,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\CommonServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
-
+        App\Providers\ZarinPalServiceProvider::class,
     ],
 
     /*
@@ -259,6 +259,7 @@ return [
         'Flasher' => Flasher\Laravel\Facade\Flasher::class,
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
         'PaytmWallet' => Anand\LaravelPaytmWallet\Facades\PaytmWallet::class,
+        'ZarinPal' => App\Facades\ZarinPal::class,
     ],
 
 ];

@@ -24,6 +24,7 @@
     <!-- Style css -->
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/own.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/frontend/css/custom-style.css') }}">
 
    
 </head>
@@ -52,9 +53,9 @@
 
                 <div class="col-auto col-lg-6 ms-auto">
                     <div class="login-btns ms-5">
-                        <a href="{{ route('login') }}" class="btn @if(Route::currentRouteName() == 'login') active @endif">{{  __('Login') }}</a>
+                        <a href="{{ route('login') }}" class="btn @if(Route::currentRouteName() == 'login') active @endif">{{  __('ورود') }}</a>
                         @if(get_settings('public_signup') == 1)
-                            <a href="{{ route('register') }}" class="btn @if(Route::currentRouteName() == 'register') active @endif">{{ __('Sign up')  }}</a>
+                            <a href="{{ route('register') }}" class="btn @if(Route::currentRouteName() == 'register') active @endif">{{ __('ثبت نام')  }}</a>
                         @endif
                     </div>
                 </div>

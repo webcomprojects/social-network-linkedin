@@ -337,6 +337,7 @@ if (!function_exists('date_formatter')) {
 if (!function_exists('currency')) {
     function currency($price = "")
     {
+        // return number_format($price) . ' تومان ';
         return $price . '$';
     }
 }
