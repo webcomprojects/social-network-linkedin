@@ -1,7 +1,7 @@
 <!-- resources/views/auth/login.blade.php -->
 <?php echo $__env->make('auth.layout.header', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
-<div class="container">
+<div class="container p-5" dir="rtl">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">

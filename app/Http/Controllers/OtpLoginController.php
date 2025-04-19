@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Services\Ippanel\OtpService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Validator;
 
 class OtpLoginController extends Controller
