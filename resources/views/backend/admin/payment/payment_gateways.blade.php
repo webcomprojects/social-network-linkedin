@@ -23,6 +23,7 @@
               <thead>
                 <tr>
                   <th scope="col">#</th>
+                  <th scope="col">{{ get_phrase('Logo') }}</th>
                   <th scope="col">{{ get_phrase('Payment Gateway') }}</th>
                   <th scope="col">{{ get_phrase('Currency') }}</th>
                   <th scope="col">{{ get_phrase('Environment') }}</th>
@@ -34,6 +35,11 @@
                 @foreach ($payment_gateways as $key => $payment_gateway )
                     <tr>
                         <td>{{++$key}}</td>
+                        <td><div class="logo">
+                          <img width="100px"
+                              src="{{ get_image('assets/payment/' . $payment_gateway->identifier . '.png') }}"
+                              alt="" />
+                      </div></td>
                         <td>{{$payment_gateway->title}}</td>
                         <td><?php echo ellipsis(script_checker($payment_gateway->currency), 50); ?></td>
                         <td>

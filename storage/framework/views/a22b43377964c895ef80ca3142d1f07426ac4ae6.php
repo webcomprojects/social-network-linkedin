@@ -23,6 +23,7 @@
               <thead>
                 <tr>
                   <th scope="col">#</th>
+                  <th scope="col"><?php echo e(get_phrase('Logo')); ?></th>
                   <th scope="col"><?php echo e(get_phrase('Payment Gateway')); ?></th>
                   <th scope="col"><?php echo e(get_phrase('Currency')); ?></th>
                   <th scope="col"><?php echo e(get_phrase('Environment')); ?></th>
@@ -34,6 +35,11 @@
                 <?php $__currentLoopData = $payment_gateways; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $payment_gateway): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <tr>
                         <td><?php echo e(++$key); ?></td>
+                        <td><div class="logo">
+                          <img width="100px"
+                              src="<?php echo e(get_image('assets/payment/' . $payment_gateway->identifier . '.png')); ?>"
+                              alt="" />
+                      </div></td>
                         <td><?php echo e($payment_gateway->title); ?></td>
                         <td><?php echo ellipsis(script_checker($payment_gateway->currency), 50); ?></td>
                         <td>

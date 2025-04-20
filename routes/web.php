@@ -249,13 +249,17 @@ Route::controller(InstallController::class)->group(function () {
 //Installation routes
 
 
-Route::get('order', function () {
+Route::post('order', function (Request $request) {
+
+    $payment_gateways_details = payment_gateways_details('zarinpal');
+
     $result = ZarinPal::request(
-        1000,
+        $badge_pay =  get_settings('badge_price'),
         'http://127.0.0.1:8000/payment-test',
         'Payment for Order #123',
         'customer@example.com',
         '09123456789',
+        $payment_gateways_details->currency
     );
 
     if ($result['success']) {
@@ -268,7 +272,7 @@ Route::get('order', function () {
         // Handle error
         return 'Error: ' . $result['error']['message'];
     }
-});
+})->name('order');
 
 Route::get('payment-test', function (Request $request) {
     $authority = $request->input('Authority');

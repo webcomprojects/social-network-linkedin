@@ -21,9 +21,11 @@ class ZarinPalServiceProvider extends ServiceProvider
 
         // Register ZarinPal service as a singleton
         $this->app->singleton('zarinpal', function ($app) {
+            $payment_gateways_details = payment_gateways_details('zarinpal');
+
             return new ZarinPalService(
-                config('zarinpal.merchant_id'),
-                config('zarinpal.sandbox')
+                json_decode($payment_gateways_details->keys, true)['Zarinpal_merchant_id'],
+                $payment_gateways_details->test_mode
             );
         });
 

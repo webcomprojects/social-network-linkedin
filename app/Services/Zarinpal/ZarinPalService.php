@@ -46,8 +46,10 @@ class ZarinPalService
      */
     public function __construct(string $merchantId = null, bool $sandbox = null)
     {
-        $this->merchantId = $merchantId ?? config('zarinpal.merchant_id');
-        $this->sandbox = $sandbox ?? config('zarinpal.sandbox', false);
+        $payment_gateways_details = payment_gateways_details('zarinpal');
+
+        $this->merchantId = $merchantId ?? json_decode($payment_gateways_details->keys, true)['Zarinpal_merchant_id'];
+        $this->sandbox = $sandbox ?? $payment_gateways_details->test_mode;
     }
 
     /**

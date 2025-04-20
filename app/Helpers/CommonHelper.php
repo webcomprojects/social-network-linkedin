@@ -750,3 +750,12 @@ if (!function_exists('is_url')) {
         return preg_match($pattern, $url) === 1;
     }
 }
+
+// get sandbox mode
+if (!function_exists('payment_gateways_details')) {
+    function payment_gateways_details($identifier)
+    {
+        return DB::table('payment_gateways')->where('identifier', $identifier)->first();
+    }
+}
+
