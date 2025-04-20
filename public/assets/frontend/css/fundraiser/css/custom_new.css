@@ -5993,3 +5993,7 @@ nav.profile-nav {
     margin-left: auto;
     margin-right: auto;
 }
+
+.badge_info svg path {
+    fill: var(--color-global);
+}

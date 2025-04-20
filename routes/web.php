@@ -9,6 +9,7 @@ use App\Http\Controllers\ModalController;
 use App\Http\Controllers\Profile;
 use App\Http\Controllers\StoryController;
 use App\Http\Controllers\Updater;
+use App\Models\Badge;
 use Illuminate\Http\Request;
 use App\Models\Account_active_request;
 use Illuminate\Support\Facades\Route;
@@ -252,11 +253,11 @@ Route::controller(InstallController::class)->group(function () {
 Route::post('order', function (Request $request) {
 
     $payment_gateways_details = payment_gateways_details('zarinpal');
-
+    $identifier = $payment_gateways_details->identifier;
     $result = ZarinPal::request(
-        $badge_pay =  get_settings('badge_price'),
-        'http://127.0.0.1:8000/payment-test',
-        'Payment for Order #123',
+        get_settings('badge_price'),
+        "http://127.0.0.1:8000/payment-test?identifier=$identifier",
+        'خرید نشان معتبر',
         'customer@example.com',
         '09123456789',
         $payment_gateways_details->currency
@@ -283,11 +284,13 @@ Route::get('payment-test', function (Request $request) {
     }
 
     // Verify the payment
-    $result = ZarinPal::verify($authority, 1000);
+    $result = ZarinPal::verify($authority, get_settings('badge_price'));
 
     if ($result['success']) {
         $referenceId = $result['referenceId'];
-        return 'Payment was successful. Reference ID: ' . $referenceId;
+        $badge = new Badge();
+        $badge->add_payment_success($request->identifier, [$authority, $referenceId]);
+        return redirect()->route('timeline');
     } else {
         return 'Error in payment verification: ' . $result['error']['message'];
     }
