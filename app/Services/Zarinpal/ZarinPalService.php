@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\ZarinPal;
+namespace App\Services\Zarinpal;
 
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
