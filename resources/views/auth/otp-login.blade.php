@@ -405,7 +405,7 @@
                     @php $system_light_logo = \App\Models\Setting::where('type', 'system_light_logo')->value('description'); @endphp
                     <img src="{{ get_system_logo_favicon($system_light_logo, 'light') }}" alt="logo" />
                 </div>
-                <p class="banner-text">به سامانه تاک خوش آمدید.
+                <p class="banner-text mb-0">به سامانه تاک خوش آمدید.
                 <p class="banner-text">جهت ورود به سیستم، لطفا از کد یکبار مصرف استفاده نمایید.
             </div>
         </div>
