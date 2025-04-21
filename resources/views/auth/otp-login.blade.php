@@ -280,7 +280,7 @@
         .company-logo img {
             max-width: 100%;
             height: auto;
-            max-height: 50px;
+            max-height: max-content;
         }
 
         /* Animation */
