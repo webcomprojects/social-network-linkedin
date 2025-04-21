@@ -11,7 +11,7 @@
     <title>{{ $system_name }}</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="shortcut icon" href="{{ get_system_logo_favicon($system_favicon,'favicon') }}">
+    <link rel="shortcut icon" href="{{ get_system_logo_favicon($system_favicon, 'favicon') }}">
 
     <!-- Font Awesome CSS -->
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/bootstrap.min.css') }}">
@@ -26,41 +26,49 @@
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/own.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/custom-style.css') }}">
 
-   
+
 </head>
 
 <body class="bg-white login">
 
 
-@php $system_light_logo = \App\Models\Setting::where('type', 'system_light_logo')->value('description'); @endphp
+    @php $system_light_logo = \App\Models\Setting::where('type', 'system_light_logo')->value('description'); @endphp
 
-<!-- header -->
-    <header class="header header-default py-3">
-    <nav class="navigation">
-        <div class="container">
-            <div class="row">
-                <div class="col-auto col-lg-6">
-                    <div class="logo-branding mt-1">
-                        <a class="navbar-brand d-xs-hidden" href="@if (Auth::check()) {{route('timeline')}} @endif">
-                            <img src="{{ get_system_logo_favicon($system_light_logo,'light') }}" height="35px" class="max-width-250px d-xs-hidden" alt="logo" />
-                        </a>
+    <!-- header -->
+    {{-- <header class="header header-default py-3">
+        <nav class="navigation">
+            <div class="container">
+                <div class="row">
+                    <div class="col-auto col-lg-6">
+                        <div class="logo-branding mt-1">
+                            <a class="navbar-brand d-xs-hidden" href="@if (Auth::check()) {{route('timeline')}} @endif">
+                                <img src="{{ get_system_logo_favicon($system_light_logo, 'light') }}" height="35px"
+                                    class="max-width-250px d-xs-hidden" alt="logo" />
+                            </a>
 
-                        <a class="navbar-brand d-block" href="@if (Auth::check()) {{route('timeline')}} @endif">
-                            <img src="{{ get_system_logo_favicon($system_light_logo,'favicon') }}" height="35px" class="max-width-250px d-hidden d-xs-show mt--5px" alt="logo" />
-                        </a>
+                            <a class="navbar-brand d-block" href="@if (Auth::check()) {{route('timeline')}} @endif">
+                                <img src="{{ get_system_logo_favicon($system_light_logo, 'favicon') }}" height="35px"
+                                    class="max-width-250px d-hidden d-xs-show mt--5px" alt="logo" />
+                            </a>
+                        </div>
                     </div>
-                </div>
 
-                <div class="col-auto col-lg-6 ms-auto">
-                    <div class="login-btns ms-5">
-                        <a href="{{ route('login') }}" class="btn @if(Route::currentRouteName() == 'login') active @endif">{{  __('ورود') }}</a>
-                        @if(get_settings('public_signup') == 1)
-                            <a href="{{ route('register') }}" class="btn @if(Route::currentRouteName() == 'register') active @endif">{{ __('ثبت نام')  }}</a>
-                        @endif
-                    </div>
+                    @guest
+                        <div class="col-auto col-lg-6 ms-auto">
+                            <div class="login-btns ms-5">
+                                <a href="{{ route('login') }}"
+                                    class="btn @if(Route::currentRouteName() == 'login') active @endif">{{  __('ورود') }}</a>
+                                @if(get_settings('public_signup') == 1)
+                                    <a href="{{ route('register') }}"
+                                        class="btn @if(Route::currentRouteName() == 'register') active @endif">{{ __('ثبت نام')  }}</a>
+                                @endif
+                            </div>
+                        </div>
+                    @endguest
+
+
                 </div>
             </div>
-        </div>
-    </nav>
-</header>
-<!-- Header End -->
+        </nav>
+    </header> --}}
+    <!-- Header End -->

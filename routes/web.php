@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\OtpController;
 use App\Http\Controllers\OtpLoginController;
 use App\Http\Controllers\InstallController;
 use App\Http\Controllers\MainController;
@@ -10,6 +11,7 @@ use App\Http\Controllers\Profile;
 use App\Http\Controllers\StoryController;
 use App\Http\Controllers\Updater;
 use App\Models\Badge;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Account_active_request;
 use Illuminate\Support\Facades\Route;
@@ -296,4 +298,9 @@ Route::get('payment-test', function (Request $request) {
     }
 });
 
-Route::get('/otp/login', [OtpLoginController::class, 'showLoginForm']);
+Route::post('/otp/send', [OtpController::class, 'send'])->middleware('throttle:5,1');
+Route::post('/otp/verify', [OtpController::class, 'verify']);
+Route::get('/login-otp', [OtpLoginController::class, 'showLoginForm'])->name('login.otp');
+Route::get('/register-otp', [OtpLoginController::class, 'showRegistrationForm'])->name('otp.register');
+Route::post('/register-otp/complete', [OtpLoginController::class, 'completeRegistration'])->name('otp.register.complete');
+

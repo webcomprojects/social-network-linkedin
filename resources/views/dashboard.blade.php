@@ -1,8 +1,12 @@
 
 @include('auth.layout.header')
-
+<style>
+    h3,h4,h5, a{
+        font-family: "Vazirmatn" !important;
+    }
+</style>
 <!-- Main Start -->
-    <main class="main my-4 p-5">
+    <main class="main my-4 p-5" dir="rtl">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6">
@@ -12,9 +16,10 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="login-txt ms-5 text-center w-100">
-                        <h3>{{ get_phrase(Congratulations')}}</h3>
-                        <h4>{{ get_phrase(Your Verification is Done')}}</h4>
-                        <h5>{{ get_phrase(Now Explore')}}</h5>
+                        <h3>{{ get_phrase('Congratulations')}}</h3>
+                        <h4>{{ get_phrase('Your Verification is Done')}}</h4>
+                        <h5>{{ get_phrase('Now Explore')}}</h5>
+                        <a href="{{ route('timeline') }}" class="btn btn-primary">ورود</a>
                     </div>
                 </div>
             </div>

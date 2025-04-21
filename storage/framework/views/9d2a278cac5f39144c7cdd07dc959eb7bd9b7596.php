@@ -11,7 +11,7 @@
     <title><?php echo e($system_name); ?></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="shortcut icon" href="<?php echo e(get_system_logo_favicon($system_favicon,'favicon')); ?>">
+    <link rel="shortcut icon" href="<?php echo e(get_system_logo_favicon($system_favicon, 'favicon')); ?>">
 
     <!-- Font Awesome CSS -->
     <link rel="stylesheet" href="<?php echo e(asset('assets/frontend/css/bootstrap.min.css')); ?>">
@@ -26,41 +26,14 @@
     <link rel="stylesheet" href="<?php echo e(asset('assets/frontend/css/own.css')); ?>">
     <link rel="stylesheet" href="<?php echo e(asset('assets/frontend/css/custom-style.css')); ?>">
 
-   
+
 </head>
 
 <body class="bg-white login">
 
 
-<?php $system_light_logo = \App\Models\Setting::where('type', 'system_light_logo')->value('description'); ?>
+    <?php $system_light_logo = \App\Models\Setting::where('type', 'system_light_logo')->value('description'); ?>
 
-<!-- header -->
-    <header class="header header-default py-3">
-    <nav class="navigation">
-        <div class="container">
-            <div class="row">
-                <div class="col-auto col-lg-6">
-                    <div class="logo-branding mt-1">
-                        <a class="navbar-brand d-xs-hidden" href="<?php if(Auth::check()): ?> <?php echo e(route('timeline')); ?> <?php endif; ?>">
-                            <img src="<?php echo e(get_system_logo_favicon($system_light_logo,'light')); ?>" height="35px" class="max-width-250px d-xs-hidden" alt="logo" />
-                        </a>
-
-                        <a class="navbar-brand d-block" href="<?php if(Auth::check()): ?> <?php echo e(route('timeline')); ?> <?php endif; ?>">
-                            <img src="<?php echo e(get_system_logo_favicon($system_light_logo,'favicon')); ?>" height="35px" class="max-width-250px d-hidden d-xs-show mt--5px" alt="logo" />
-                        </a>
-                    </div>
-                </div>
-
-                <div class="col-auto col-lg-6 ms-auto">
-                    <div class="login-btns ms-5">
-                        <a href="<?php echo e(route('login')); ?>" class="btn <?php if(Route::currentRouteName() == 'login'): ?> active <?php endif; ?>"><?php echo e(__('ورود')); ?></a>
-                        <?php if(get_settings('public_signup') == 1): ?>
-                            <a href="<?php echo e(route('register')); ?>" class="btn <?php if(Route::currentRouteName() == 'register'): ?> active <?php endif; ?>"><?php echo e(__('ثبت نام')); ?></a>
-                        <?php endif; ?>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </nav>
-</header>
-<!-- Header End --><?php /**PATH C:\Users\PicoNet\Desktop\linkedin\resources\views/auth/layout/header.blade.php ENDPATH**/ ?>
+    <!-- header -->
+    
+    <!-- Header End --><?php /**PATH C:\Users\PicoNet\Desktop\linkedin\resources\views/auth/layout/header.blade.php ENDPATH**/ ?>

@@ -178,10 +178,5 @@ Route::get('/roomName', [ApiController::class,'roomName']);
 Route::get('/about_policy', [ApiController::class,'about_policy']);
 
 
-Route::post('/otp/send', [OtpController::class, 'send'])->middleware('throttle:5,1');
-Route::post('/otp/verify', [OtpController::class, 'verify']);
-
-
-
 
 

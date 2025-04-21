@@ -23,25 +23,25 @@ class OtpService
     }
     
     /**
-     * Generate and send OTP code to the given mobile number
+     * Generate and send OTP code to the given phone number
      *
-     * @param string $mobile Mobile number
+     * @param string $phone phone number
      * @return array
      */
-    public function send(string $mobile): array
+    public function send(string $phone): array
     {
         try {
-            // Normalize mobile number format
-            $mobile = $this->normalizeMobile($mobile);
+            // Normalize phone number format
+            $phone = $this->normalizephone($phone);
             
             // Generate OTP code (6 digits)
             $code = $this->generateCode();
             
             // Store OTP code in cache with 2 minutes expiration
-            $this->storeCode($mobile, $code);
+            $this->storeCode($phone, $code);
             
             // Send OTP via ippanel API
-            $response = $this->sendSms($mobile, $code);
+            $response = $this->sendSms($phone, $code);
             
             return [
                 'success' => true,
@@ -65,14 +65,14 @@ class OtpService
     /**
      * Verify the OTP code
      *
-     * @param string $mobile Mobile number
+     * @param string $phone phone number
      * @param string $code OTP code
      * @return array
      */
-    public function verify(string $mobile, string $code): array
+    public function verify(string $phone, string $code): array
     {
-        $mobile = $this->normalizeMobile($mobile);
-        $cachedCode = $this->getCode($mobile);
+        $phone = $this->normalizephone($phone);
+        $cachedCode = $this->getCode($phone);
         
         if (!$cachedCode) {
             return [
@@ -89,11 +89,12 @@ class OtpService
         }
         
         // Clear the cache after successful verification
-        $this->clearCode($mobile);
+        $this->clearCode($phone);
         
         return [
             'success' => true,
-            'message' => 'کد تایید با موفقیت تایید شد'
+            'message' => 'کد تایید با موفقیت تایید شد',
+            'redirect' => route('timeline')
         ];
     }
     
@@ -110,70 +111,70 @@ class OtpService
     /**
      * Store OTP code in cache
      *
-     * @param string $mobile
+     * @param string $phone
      * @param string $code
      * @return void
      */
-    protected function storeCode(string $mobile, string $code): void
+    protected function storeCode(string $phone, string $code): void
     {
-        $key = 'otp_' . $mobile;
+        $key = 'otp_' . $phone;
         Cache::put($key, $code, now()->addMinutes(2));
     }
     
     /**
      * Get stored OTP code from cache
      *
-     * @param string $mobile
+     * @param string $phone
      * @return string|null
      */
-    protected function getCode(string $mobile): ?string
+    protected function getCode(string $phone): ?string
     {
-        $key = 'otp_' . $mobile;
+        $key = 'otp_' . $phone;
         return Cache::get($key);
     }
     
     /**
      * Clear OTP code from cache
      *
-     * @param string $mobile
+     * @param string $phone
      * @return void
      */
-    protected function clearCode(string $mobile): void
+    protected function clearCode(string $phone): void
     {
-        $key = 'otp_' . $mobile;
+        $key = 'otp_' . $phone;
         Cache::forget($key);
     }
     
     /**
-     * Normalize mobile number to international format
+     * Normalize phone number to international format
      *
-     * @param string $mobile
+     * @param string $phone
      * @return string
      */
-    protected function normalizeMobile(string $mobile): string
+    protected function normalizephone(string $phone): string
     {
         // Remove any non-digit characters
-        $mobile = preg_replace('/\D/', '', $mobile);
+        $phone = preg_replace('/\D/', '', $phone);
         
         // Add country code if needed (assuming Iranian number)
-        if (strlen($mobile) === 10 && substr($mobile, 0, 1) === '9') {
-            $mobile = '98' . $mobile;
-        } elseif (strlen($mobile) === 11 && substr($mobile, 0, 2) === '09') {
-            $mobile = '98' . substr($mobile, 1);
+        if (strlen($phone) === 10 && substr($phone, 0, 1) === '9') {
+            $phone = '98' . $phone;
+        } elseif (strlen($phone) === 11 && substr($phone, 0, 2) === '09') {
+            $phone = '98' . substr($phone, 1);
         }
         
-        return $mobile;
+        return $phone;
     }
     
     /**
      * Send SMS using ippanel API
      *
-     * @param string $mobile
+     * @param string $phone
      * @param string $code
      * @return array
      * @throws Exception
      */
-    protected function sendSms(string $mobile, string $code): array
+    protected function sendSms(string $phone, string $code): array
     {
         // Pattern values for OTP template
         $patternValues = [
@@ -192,7 +193,7 @@ class OtpService
             'json' => [
                 'pattern_code' => $this->patternCode,
                 'originator' => $this->originator,
-                'recipient' => $mobile,
+                'recipient' => $phone,
                 'values' => $patternValues,
             ],
         ]);
