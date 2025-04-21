@@ -405,9 +405,8 @@
                     @php $system_light_logo = \App\Models\Setting::where('type', 'system_light_logo')->value('description'); @endphp
                     <img src="{{ get_system_logo_favicon($system_light_logo, 'light') }}" alt="logo" />
                 </div>
-                <h1 class="banner-title">سازمان متخصصین و مدیران ایران</h1>
-                <p class="banner-text">به سامانه تاک خوش آمدید. جهت ورود به سیستم، لطفا از کد یکبار مصرف استفاده نمایید.
-                </p>
+                <p class="banner-text">به سامانه تاک خوش آمدید.
+                <p class="banner-text">جهت ورود به سیستم، لطفا از کد یکبار مصرف استفاده نمایید.
             </div>
         </div>
 
