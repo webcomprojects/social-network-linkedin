@@ -406,7 +406,7 @@
                     <img src="{{ get_system_logo_favicon($system_light_logo, 'light') }}" alt="logo" />
                 </div>
                 <p class="banner-text" style="margin-bottom: 0">به سامانه تاک خوش آمدید.
-                <p class="banner-text">جهت ورود به سیستم، لطفا از کد یکبار مصرف استفاده نمایید.
+                <p class="banner-text" style="font-size: 15px">جهت ورود به سیستم، لطفا از کد یکبار مصرف استفاده نمایید.
             </div>
         </div>
 
