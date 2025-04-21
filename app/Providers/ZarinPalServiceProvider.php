@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Services\ZarinPal\ZarinPalService;
+use App\Services\Zarinpal\ZarinPalService;
 use Illuminate\Support\ServiceProvider;
 
 class ZarinPalServiceProvider extends ServiceProvider
